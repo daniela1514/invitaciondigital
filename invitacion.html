@@ -373,31 +373,49 @@
     const playIcon = document.getElementById("play-icon");
     const pauseIcon = document.getElementById("pause-icon");
 
-    toggleBtn.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play();
-        playIcon.style.display = "none";
-        pauseIcon.style.display = "block";
-      } else {
-        audio.pause();
-        playIcon.style.display = "block";
-        pauseIcon.style.display = "none";
-      }
+      // Estado visual inicial: audio está en autoplay pero muteado.
+    // Dejamos icono de "play" hasta que el usuario active el sonido.
+    playIcon.style.display = "block";
+    pauseIcon.style.display = "none";
+
+    // Función que "desbloquea" el audio (quita mute y reproduce con volumen)
+  function unlockAudio() {
+    // quitar el mute y poner un volumen razonable
+    audio.muted = false;
+    audio.volume = 0.65; // ajusta el volumen inicial si quieres
+    // intentar reproducir (la promesa puede fallar si el navegador lo impide)
+    audio.play().then(() => {
+      // éxito: actualizar iconos a "pause"
+      playIcon.style.display = "none";
+      pauseIcon.style.display = "block";
+    }).catch((err) => {
+      // si falla, seguimos mostrando play (no es crítico)
+      console.warn("No se pudo reproducir el audio tras la interacción:", err);
     });
+  }
 
-    window.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("bg-music");
+    // Listeners confiables para "primer gesto"
+  document.addEventListener("click", unlockAudio, { once: true });
+  document.addEventListener("touchstart", unlockAudio, { once: true });
+  document.addEventListener("keydown", unlockAudio, { once: true });
 
-  // Reproduce apenas el usuario haga click o scroll
-  const startMusic = () => {
-    audio.play();
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("scroll", startMusic);
-  };
+  // Comportamiento del botón toggle (Play / Pause)
+  toggleBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      // Si está pausado, aseguramos estar sin mute y reproducimos
+      audio.muted = false;
+      audio.volume = 0.65;
+      audio.play().catch(()=>{ /* ignorar errores menores */ });
+      playIcon.style.display = "none";
+      pauseIcon.style.display = "block";
+    } else {
+      // Si está reproduciéndose, pausamos (no mutear)
+      audio.pause();
+      playIcon.style.display = "block";
+      pauseIcon.style.display = "none";
+    }
+  });
 
-  document.addEventListener("click", startMusic);
-  document.addEventListener("scroll", startMusic);
-});
 
   const animElements = document.querySelectorAll(".fade-in-up, .fade-in-down");
 
