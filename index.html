@@ -340,24 +340,12 @@
   <script>
     function mostrarinvitacion() {
       document.getElementById("pagina1").style.display = "none"; 
-      document.getElementById("pagina2").style.display = "flex"; 
+      document.getElementById("pagina2").style.display = "block"; 
 
       // Reproducir música
       const audio = document.getElementById("miAudio");
       audio.play();
     }
-    // Animación al hacer scroll (Intersection Observer)
-    const imgs = document.querySelectorAll(".imagenes img");
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.1 });
-
-    imgs.forEach(img => observer.observe(img));
 
     const target = new Date('2025-09-13T20:30:00-05:00');
     const startedAt = new Date();
