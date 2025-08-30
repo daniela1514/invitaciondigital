@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación Abigail</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: #000;
+    }
+
+    .container-inicio {
+      position: relative;
+      width: 100%;
+      /*max-width: 600px;  /* Para que no se deforme en pantallas grandes */
+      margin: auto;
+    }
+
+    .container-inicio img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .btn-inicio {
+      position: absolute;
+      top: 77.5%;       /* ← calculado en proporción */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;       /* también en porcentaje para adaptarse al tamaño */
+      padding: 12px 0;
+      text-align: center;
+
+      background: #ffffff00;
+      color: #ffffff00;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+
+      /* border: 2px dashed red; 🔴 quitar cuando esté listo */
+    }
+  </style>
+</head>
+<body>
+  <div class="container-inicio">
+    <img src="assets/inicio.png" alt="Invitación Abigail">
+    <a href="invitacion.html" class="btn-inicio">INGRESAR</a>
+  </div>
+</body>
+</html>

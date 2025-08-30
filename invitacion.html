@@ -26,6 +26,50 @@
       --radius: 24px;
     }
 
+    .pantalla {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #pagina2 {
+      display: none; /* Oculta la página2 al inicio */
+    }
+
+    .container-inicio {
+      position: relative;
+      width: 100%;
+      /*max-width: 600px;  /* Para que no se deforme en pantallas grandes */
+      margin: auto;
+    }
+
+    .container-inicio img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .btn-inicio {
+      position: absolute;
+      top: 77.5%;       /* ← calculado en proporción */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50%;       /* también en porcentaje para adaptarse al tamaño */
+      padding: 12px 0;
+      text-align: center;
+
+      background: #ffffff00;
+      color: #ffffff00;
+      font-weight: bold;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+
+      /* border: 2px dashed red; 🔴 quitar cuando esté listo */
+    }
+
     /* VIDEO */
     .video-container {
       position: relative;
@@ -205,90 +249,104 @@
 
     @media (max-width:640px){.misquince-container img{width: 40%;}}
 
-
-
-
   </style>
 </head>
 <body>
 
-  <!-- Video a pantalla completa -->
-  <div class="video-container">
-    <video autoplay muted loop playsinline>
-      <source src="assets/video.mp4" type="video/mp4">
-    </video>
-
-    <!-- Contenido encima del video -->
-    <div class="video-overlay">
-      <div class="misquince-container">
-        <img src="assets/mis quince.png" alt=""   class="imagen-zoom">
-      </div>
-      <div>
-        <p>FALTAN</p>
-        <section class="card">
-          <div class="grid" id="countdown">
-            <div class="unit"><span class="label">Días</span><span class="value" id="days">--</span></div>
-            <div class="unit"><span class="label">Horas</span><span class="value" id="hours">--</span></div>
-            <div class="unit"><span class="label">Minutos</span><span class="value" id="minutes">--</span></div>
-            <div class="unit"><span class="label">Segundos</span><span class="value" id="seconds">--</span></div>
-          </div>
-
-          <div class="progress"><div class="bar" id="bar"></div></div>
-          <div class="foot" id="foot"></div>
-          <div class="done" id="done" hidden>🎉 ¡Llegó el momento! 🎉</div>
-        </section>
-      </div>
-      <div class="deslizar-container">
-        <img src="assets/delizar.png" alt="" width="20%"  class="fade-in-up">
-      </div>
-      
+  <div id="pagina1" class="pantalla">
+    <div class="container-inicio">
+      <img src="assets/inicio.png" alt="Invitación Abigail">
+      <a onclick="mostrarinvitacion()" class="btn-inicio">INGRESAR</a>
     </div>
   </div>
 
-  <!-- Audio de fondo -->
-  <audio id="bg-music" autoplay loop muted>
-    <source src="assets/musica.mp3" type="audio/mpeg" >
-    Tu navegador no soporta el audio.
-  </audio>
+  <div id="pagina2" class="pantalla"> 
+    <!-- Video a pantalla completa -->
+    <div class="video-container">
+      <video autoplay muted loop playsinline>
+        <source src="assets/video.mp4" type="video/mp4">
+      </video>
 
-  <!-- Botón de control de audio -->
-  <div id="audio-controls">
-    <button id="audio-toggle">
-      <!-- Icono Play (SVG) -->
-      <svg id="play-icon" viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7z"></path>
-      </svg>
-      <!-- Icono Stop/Pause (SVG) oculto -->
-      <svg id="pause-icon" viewBox="0 0 24 24" style="display: none;">
-        <path d="M6 19h4V5H6zm8-14v14h4V5h-4z"></path>
-      </svg>
-    </button>
-  </div>
+      <!-- Contenido encima del video -->
+      <div class="video-overlay">
+        <div class="misquince-container">
+          <img src="assets/mis quince.png" alt=""   class="imagen-zoom">
+        </div>
+        <div>
+          <p>FALTAN</p>
+          <section class="card">
+            <div class="grid" id="countdown">
+              <div class="unit"><span class="label">Días</span><span class="value" id="days">--</span></div>
+              <div class="unit"><span class="label">Horas</span><span class="value" id="hours">--</span></div>
+              <div class="unit"><span class="label">Minutos</span><span class="value" id="minutes">--</span></div>
+              <div class="unit"><span class="label">Segundos</span><span class="value" id="seconds">--</span></div>
+            </div>
 
-  <div class="image-container">
-    <img src="assets/parte 1.png" alt="Imagen 1">
-  </div>
+            <div class="progress"><div class="bar" id="bar"></div></div>
+            <div class="foot" id="foot"></div>
+            <div class="done" id="done" hidden>🎉 ¡Llegó el momento! 🎉</div>
+          </section>
+        </div>
+        <div class="deslizar-container">
+          <img src="assets/delizar.png" alt="" width="20%"  class="fade-in-up">
+        </div>
+        
+      </div>
+    </div>
 
-  <div class="image-container">
-    <img src="assets/parte 2.png" alt="Imagen 2">
-  </div>
+    <!-- Audio de fondo -->
+    <audio id="bg-music" autoplay loop muted>
+      <source src="assets/musica.mp3" type="audio/mpeg" >
+      Tu navegador no soporta el audio.
+    </audio>
+
+    <!-- Botón de control de audio -->
+    <div id="audio-controls">
+      <button id="audio-toggle">
+        <!-- Icono Play (SVG) -->
+        <svg id="play-icon" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"></path>
+        </svg>
+        <!-- Icono Stop/Pause (SVG) oculto -->
+        <svg id="pause-icon" viewBox="0 0 24 24" style="display: none;">
+          <path d="M6 19h4V5H6zm8-14v14h4V5h-4z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="image-container">
+      <img src="assets/parte 1.png" alt="Imagen 1">
+    </div>
+
+    <div class="image-container">
+      <img src="assets/parte 2.png" alt="Imagen 2">
+    </div>
 
 
-  <div class="image-container">
-    <img src="assets/parte3.png" alt="Imagen 3">
-    <a href="https://maps.app.goo.gl/BLsueG77DXd8C9yJA" class="hotspot" style="top:32.5%; left:50%;" target="_blank">Ubicación</a>
-    <a href="https://api.whatsapp.com/send?phone=51942402274&text=Hola%20Abigail,%20gracias%20por%20la%20invitación%20a%20tus%2015%20años%2C%20confirmo%20mi%20asistencia.%20Mi%20nombre%20y%20apellido%20es%3A%20" class="hotspot" style="top:59%; left:50%;" target="_blank">Confirmar</a>
-  </div>
+    <div class="image-container">
+      <img src="assets/parte3.png" alt="Imagen 3">
+      <a href="https://maps.app.goo.gl/BLsueG77DXd8C9yJA" class="hotspot" style="top:32.5%; left:50%;" target="_blank">Ubicación</a>
+      <a href="https://api.whatsapp.com/send?phone=51942402274&text=Hola%20Abigail,%20gracias%20por%20la%20invitación%20a%20tus%2015%20años%2C%20confirmo%20mi%20asistencia.%20Mi%20nombre%20y%20apellido%20es%3A%20" class="hotspot" style="top:59%; left:50%;" target="_blank">Confirmar</a>
+    </div>
 
-  <div class="image-container">
-    <img src="assets/parte 4.png" alt="Imagen 4">
-  </div>
+    <div class="image-container">
+      <img src="assets/parte 4.png" alt="Imagen 4">
+    </div>
 
-  <div class="image-container">
-    <img src="assets/parte 5.png" alt="Imagen 5 ">
+    <div class="image-container">
+      <img src="assets/parte 5.png" alt="Imagen 5 ">
+    </div>
   </div>
 
   <script>
+    function mostrarinvitacion() {
+      document.getElementById("pagina1").style.display = "none"; 
+      document.getElementById("pagina2").style.display = "flex"; 
+
+      // Reproducir música
+      const audio = document.getElementById("miAudio");
+      audio.play();
+    }
     // Animación al hacer scroll (Intersection Observer)
     const imgs = document.querySelectorAll(".imagenes img");
 
