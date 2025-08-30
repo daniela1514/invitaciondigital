@@ -246,7 +246,7 @@
   </div>
 
   <!-- Audio de fondo -->
-  <audio id="bg-music" loop>
+  <audio id="bg-music" autoplay loop muted>
     <source src="assets/musica.mp3" type="audio/mpeg" >
     Tu navegador no soporta el audio.
   </audio>
@@ -301,9 +301,7 @@
     }, { threshold: 0.1 });
 
     imgs.forEach(img => observer.observe(img));
-  </script>
 
-    <script>
     const target = new Date('2025-09-13T20:30:00-05:00');
     const startedAt = new Date();
 
@@ -369,9 +367,7 @@
 
     update();
     const timer = setInterval(update,1000);
-  </script>
 
- <script>
     const audio = document.getElementById("bg-music");
     const toggleBtn = document.getElementById("audio-toggle");
     const playIcon = document.getElementById("play-icon");
@@ -388,9 +384,21 @@
         pauseIcon.style.display = "none";
       }
     });
-  </script>
 
-  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+
+  // Reproduce apenas el usuario haga click o scroll
+  const startMusic = () => {
+    audio.play();
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("scroll", startMusic);
+  };
+
+  document.addEventListener("click", startMusic);
+  document.addEventListener("scroll", startMusic);
+});
+
   const animElements = document.querySelectorAll(".fade-in-up, .fade-in-down");
 
   const observer2 = new IntersectionObserver((entries) => {
